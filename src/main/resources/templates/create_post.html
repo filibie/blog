@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{blog.createPostTitle}">Create Blog Post</title>
+    <!-- Link to your site's CSS or a general editor stylesheet -->
+    <link rel="stylesheet" href="/css/editor.css"> 
+</head>
+<body>
+
+<div class="container">
+    <h1>Create New Blog Post</h1>
+
+    <form th:action="@{/posts}" th:object=${post} method="POST">
+        <!-- Title field -->
+        <label for="title">Post Title:</label>
+        <input type="text" id="title" th:field="*{title}" required><br><br>
+
+        <!-- Markdown Content Field (The primary area) -->
+        <div class="markdown-editor-container">
+            <textarea 
+                id="content" 
+                th:field="*{content}" 
+                rows="20" 
+                placeholder="Start writing your post in Markdown..." 
+                required></textarea>
+        </div>
+        <p class="help-text">Markdown content is highly recommended for formatting.</p><br>
+
+        <!-- Optional fields (e.g., tags, author) -->
+        <label for="tags">Tags:</label>
+        <input type="text" id="tags" th:field="*{tags}">
+        
+        <button type="submit">Publish Post</button>
+    </form>
+</div>
+
+<!-- Optional script block for rich text initialization or client-side validation -->
+<script src="/js/editor.js"></script>
+
+</body>
+</html>
