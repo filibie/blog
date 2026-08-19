@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -28,24 +29,39 @@ public class BlogController {
     public String listPosts(Model model) {
         List<BlogPost> posts = blogService.findAllPosts();
         model.addAttribute("posts", posts);
-        return "index"; // Maps to src/main/resources/templates/index.html
+        model.addAttribute("pageTitle", "Home");
+        return "index";
     }
 
-    /**
-     * Displays the detailed content of a single blog post.
-     */
+    @GetMapping("/create-post")
+    public String createPostPage(Model model) {
+        BlogPost blogPost = new BlogPost();
+        model.addAttribute("post", blogPost);
+        model.addAttribute("pageTitle", "Create New Post");
+        return "create-post";
+    }
+
+    @GetMapping("/post/{id}")
+    public String getPost(@PathVariable Long id, Model model) {
+        BlogPost post = blogService.findById(id);
+        if (post == null) {
+            throw new RuntimeException("Post not found: " + id);
+        }
+        model.addAttribute("post", post);
+        return "post-detail";
+    }
 
     /**
      * Handles creation of a new blog post.
      */
-    @PostMapping("/create")
-    public String createPost(@ModelAttribute("postData") BlogPost postData, Model model) {
+    @PostMapping("/submit-post")
+    public String submitPost(@ModelAttribute("postData") BlogPost postData, Model model) {
         if (postData.getAuthor() == null || postData.getAuthor().trim().isEmpty()) {
             postData.setAuthor("Current User"); 
         }
 
         BlogPost savedPost = blogService.savePost(postData);
-        model.addAttribute("message", "Blog post created successfully!");
+        model.addAttribute("pageTitle", "Home");
         return "redirect:/"; 
     }
 }

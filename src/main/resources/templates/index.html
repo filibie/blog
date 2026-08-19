@@ -1,33 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8"/>
-    <title>My Spring Blog</title>
-    <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/base :: head(pageTitle='Home')}">
 </head>
+
 <body>
+    <div class="container mt-5 pt-3">
+        <h1 class="mb-4 text-center">Blog Posts</h1>
 
-<div class="container mt-5">
-    <h1 class="mb-4 text-center">Latest Blog Posts</h1>
+        <div class="row" th:if="${posts != null and !posts.isEmpty()}">
+            <div class="col-md-4 mb-4" th:each="post : ${posts}">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${post.title}">Post Title</h5>
+                        <p class="card-text text-muted small mb-2">
+                            Published on: <span th:text="${#temporals.format(post.createdAt, 'MMMM dd, yyyy')}">Date</span>
+                        </p>
+                        <p class="card-text" th:utext="${post.content != null and post.content.length() > 0 ? #strings.abbreviate(post.content, 200) + '...' : ''}"></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted" th:text="${post.author ?: 'Unknown'}">Author</small>
+                            <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-sm btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div th:each="post : ${posts}" class="card mb-3 shadow-sm">
-        <div class="card-body">
-            <h5 class="card-title" th:text="${post.title}">Post Title</h5>
-            <p class="card-text text-muted small">Published on: <span th:text="${#temporals.format(post.createdAt, 'MMMMM dd, yyyy')}">Date</span></p>
-            <!-- Displaying a snippet of content -->
-            <p class="card-text" th:text="${T(java.util.stream.Stream).of(post.content).limit(100).findFirst().orElse('')}"></p>
-            <a href="#" class="btn btn-primary read-more">Read More</a>
+        <div th:if="${posts == null || posts.isEmpty()}" class="alert alert-info mt-5 text-center" role="alert">
+            No blog posts found. Be the first to write one!
         </div>
     </div>
-
-    <div th:if="${posts == null || posts.empty}" class="alert alert-warning mt-5" role="alert">
-        No blog posts found. Start writing!
-    </div>
-</div>
-
-<!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
+
 </html>

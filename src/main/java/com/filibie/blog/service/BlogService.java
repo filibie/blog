@@ -24,4 +24,8 @@ public class BlogService {
     public BlogPost savePost(BlogPost post) {
         return blogRepository.save(post);
     }
+
+    public BlogPost findById(Long id) {
+        return blogRepository.findById(id).orElse(null);
+    }
 }
