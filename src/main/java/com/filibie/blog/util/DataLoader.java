@@ -23,7 +23,12 @@ public class DataLoader implements CommandLineRunner {
         post1.setAuthor("filon");
         post1.setTitle("Hello from my first blog post!! :)");
         post1.setContent("Hello from my first blog post, this is start of a great journey of me writing very "
-                + "interesting blog posts for you :)");
+                + "interesting blog posts for you :)" +
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore " +
+                "et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut " +
+                "aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum " +
+                "dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui " +
+                "officia deserunt mollit anim id est laborum.");
         post1.setCreatedAt(LocalDateTime.now());
         service.savePost(post1);
 
@@ -32,7 +37,28 @@ public class DataLoader implements CommandLineRunner {
         BlogPost post2 = new BlogPost();
         post2.setAuthor("filon");
         post2.setTitle("Second Post, buckle up");
-        post2.setContent("This is my second blog post, buckle up for a ride with more of those stinky blog posts!! :DrR");
+        post2.setContent("This is my second blog post, buckle up for a ride with more of those stinky blog posts!! :D" +
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore " +
+                "et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut " +
+                "aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum " +
+                "dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui " +
+                "officia deserunt mollit anim id est laborum." +
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore " +
+                "et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut " +
+                "aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum " +
+                "dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui " +
+                "officia deserunt mollit anim id est laborum." +
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore " +
+                "et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut " +
+                "aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum " +
+                "dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui " +
+                "officia deserunt mollit anim id est laborum." +
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore " +
+                "et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut " +
+                "aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum " +
+                "dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui " +
+                "officia deserunt mollit anim id est laborum."
+                );
         post2.setCreatedAt(LocalDateTime.now());
         service.savePost(post2);
     }
