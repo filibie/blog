@@ -28,4 +28,12 @@ public class BlogService {
     public BlogPost findById(Long id) {
         return blogRepository.findById(id).orElse(null);
     }
+
+    public List<BlogPost> getPostsSortedByDate() {
+        List<BlogPost> posts = blogRepository.findAll();
+        return posts.stream().sorted((p1, p2) -> {
+            if (p1.getCreatedAt().equals(p2.getCreatedAt())) return 0;
+            else return p1.getCreatedAt().isBefore(p2.getCreatedAt()) ? 1 : -1;
+        }).toList();
+    }
 }

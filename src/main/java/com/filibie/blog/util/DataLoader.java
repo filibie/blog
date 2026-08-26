@@ -27,11 +27,12 @@ public class DataLoader implements CommandLineRunner {
         post1.setCreatedAt(LocalDateTime.now());
         service.savePost(post1);
 
+        Thread.sleep(2000);
+
         BlogPost post2 = new BlogPost();
         post2.setAuthor("filon");
         post2.setTitle("Second Post, buckle up");
-        post2.setContent("Hello from my first blog post, this is start of a great journey of me writing very "
-                + "interesting blog posts for you :)");
+        post2.setContent("This is my second blog post, buckle up for a ride with more of those stinky blog posts!! :DrR");
         post2.setCreatedAt(LocalDateTime.now());
         service.savePost(post2);
     }

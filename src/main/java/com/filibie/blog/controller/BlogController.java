@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class BlogController {
@@ -25,23 +26,21 @@ public class BlogController {
     /**
      * Displays the list of all published blog posts.
      */
+
     @GetMapping("/")
+    public String rootControler() {
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/posts")
     public String listPosts(Model model) {
-        List<BlogPost> posts = blogService.findAllPosts();
+        List<BlogPost> posts = blogService.getPostsSortedByDate();
         model.addAttribute("posts", posts);
         model.addAttribute("pageTitle", "Home");
         return "index";
     }
 
-    @GetMapping("/create-post")
-    public String createPostPage(Model model) {
-        BlogPost blogPost = new BlogPost();
-        model.addAttribute("post", blogPost);
-        model.addAttribute("pageTitle", "Create New Post");
-        return "create-post";
-    }
-
-    @GetMapping("/post/{id}")
+    @GetMapping("/posts/{id}")
     public String getPost(@PathVariable Long id, Model model) {
         BlogPost post = blogService.findById(id);
         if (post == null) {
@@ -51,17 +50,28 @@ public class BlogController {
         return "post-detail";
     }
 
+    @GetMapping("/posts/submit")
+    public String createPostPage(Model model) {
+        BlogPost blogPost = new BlogPost();
+        model.addAttribute("post", blogPost);
+        model.addAttribute("pageTitle", "Create New Post");
+        return "create-post";
+    }
+
     /**
      * Handles creation of a new blog post.
      */
-    @PostMapping("/submit-post")
+    @PostMapping("/posts/submit")
     public String submitPost(@ModelAttribute("postData") BlogPost postData, Model model) {
         if (postData.getAuthor() == null || postData.getAuthor().trim().isEmpty()) {
-            postData.setAuthor("Current User"); 
+            postData.setAuthor("Current User");
         }
 
         BlogPost savedPost = blogService.savePost(postData);
         model.addAttribute("pageTitle", "Home");
-        return "redirect:/"; 
+        return "redirect:/posts";
     }
+
+
+
 }
