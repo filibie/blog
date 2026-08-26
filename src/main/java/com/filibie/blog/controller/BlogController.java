@@ -106,4 +106,14 @@ import java.util.stream.Collectors;
                 return "redirect:/posts/" + existingPost.getId();
             }
 
+            @GetMapping("/posts/delete/{id}")
+            public String deletePost(@PathVariable Long id, Model model) {
+                BlogPost post = blogService.findById(id);
+                if (post == null) {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found " + id);
+                }
+                blogService.deletePost(post);
+                return "redirect:/posts";
+            }
+
         }

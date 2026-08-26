@@ -32,4 +32,8 @@ public class BlogService {
     public List<BlogPost> getPostsSortedByDate() {
         return blogRepository.findAllByOrderByCreatedAtDesc();
     }
+
+    public void deletePost(BlogPost post) {
+        blogRepository.delete(post);
+    }
 }
