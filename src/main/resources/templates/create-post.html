@@ -17,11 +17,12 @@
                                th:field="*{title}" required placeholder="Enter post title">
                     </div>
                     
-                    <div class="mb-3">
-                        <label for="content" class="form-label">Content <span class="text-danger">*</span></label>
-                        <textarea id="content" class="form-control" 
-                                  th:field="*{content}" rows="15" required placeholder="Write your blog post..."></textarea>
-                    </div>
+                     <div class="mb-3">
+                         <label for="content" class="form-label">Content (Markdown) <span class="text-danger">*</span></label>
+                         <p class="text-muted small mb-2">Write your post using Markdown syntax.</p>
+                         <textarea id="content" class="form-control" 
+                                   th:field="*{content}" rows="15" required placeholder="# Heading&#10;&#10;**Bold** and *italic* text&#10;- List items&#10;`code` blocks"></textarea>
+                     </div>
                     
                     <div class="mb-4">
                         <label for="author" class="form-label">Author</label>
@@ -32,10 +33,12 @@
                     <button type="submit" class="btn btn-primary">Publish Post</button>
                 </form>
 
-                <a href="/" class="btn btn-secondary mt-3">← Back to Posts</a>
-            </div>
-        </div>
-    </div>
-</body>
+                 <a href="/" class="btn btn-secondary mt-3">← Back to Posts</a>
+             </div>
+         </div>
+     </div>
+     
+     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+ </body>
 
-</html>
+ </html>
