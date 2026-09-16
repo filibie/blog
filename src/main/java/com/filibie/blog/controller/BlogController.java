@@ -72,6 +72,4 @@ public class BlogController {
         return "redirect:/posts";
     }
 
-
-
 }
