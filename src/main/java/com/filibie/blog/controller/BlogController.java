@@ -78,7 +78,7 @@ public class BlogController {
     @PostMapping("/posts/submit")
     public String submitPost(@ModelAttribute("post") BlogPost postData, Model model) {
         if (postData.getAuthor() == null || postData.getAuthor().trim().isEmpty()) {
-            postData.setAuthor("default");
+            postData.setAuthor("Default");
         }
 
         BlogPost savedPost = blogService.savePost(postData);
